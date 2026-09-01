@@ -167,3 +167,28 @@
 ![img_5.png](Unit1/Setup%20Android%20Studio/img_5.png)
 
 ![img_6.png](Unit1/Setup%20Android%20Studio/img_6.png)
+
+---
+# Simple text app
+---
+![img.png](Unit1/Create%20simple%20app/img.png)
+
+![img_1.png](Unit1/Create%20simple%20app/img_1.png)
+
+![img_2.png](Unit1/Create%20simple%20app/img_2.png)
+
+![img_3.png](Unit1/Create%20simple%20app/img_3.png)
+
+![img_4.png](Unit1/Create%20simple%20app/img_4.png)
+
+![img_5.png](Unit1/Create%20simple%20app/img_5.png)
+
+![img_6.png](Unit1/Create%20simple%20app/img_6.png)
+
+![img_7.png](Unit1/Create%20simple%20app/img_7.png)
+
+![img_8.png](Unit1/Create%20simple%20app/img_8.png)
+
+![img_9.png](Unit1/Create%20simple%20app/img_9.png)
+
+![img_10.png](Unit1/Create%20simple%20app/img_10.png)
