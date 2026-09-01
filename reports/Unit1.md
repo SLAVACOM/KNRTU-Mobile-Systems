@@ -1,7 +1,8 @@
 ---
 # Your first program in Kotlin
 ---
-![img.png](Unit1/Your%20first%20program%20in%20Kotlin/img.png)
+![img.png](Unit
+1/Your%20first%20program%20in%20Kotlin/img.png)
 
 ![img_1.png](Unit1/Your%20first%20program%20in%20Kotlin/img_1.png)
 
@@ -148,3 +149,21 @@
 ![img_13.png](Unit1/Practice_Problems_Kotlin_Basics/img_13.png)
 
 ![img_14.png](Unit1/Practice_Problems_Kotlin_Basics/img_14.png)
+
+---
+# Setup Android Studio
+---
+
+![img.png](Unit1/Setup%20Android%20Studio/img.png)
+
+![img_1.png](Unit1/Setup%20Android%20Studio/img_1.png)
+
+![img_2.png](Unit1/Setup%20Android%20Studio/img_2.png)
+
+![img_3.png](Unit1/Setup%20Android%20Studio/img_3.png)
+
+![img_4.png](Unit1/Setup%20Android%20Studio/img_4.png)
+
+![img_5.png](Unit1/Setup%20Android%20Studio/img_5.png)
+
+![img_6.png](Unit1/Setup%20Android%20Studio/img_6.png)
