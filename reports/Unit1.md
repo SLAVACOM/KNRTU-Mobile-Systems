@@ -194,7 +194,7 @@
 ![img_10.png](Unit1/Create%20simple%20app/img_10.png)
 
 ---
-Add Image
+# Add Image
 ---
 ![img.png](Unit1/Add%20images%20to%20your%20Android%20app/img.png)
 
@@ -209,3 +209,9 @@ Add Image
 ![img_5.png](Unit1/Add%20images%20to%20your%20Android%20app/img_5.png)
 
 ![img_6.png](Unit1/Add%20images%20to%20your%20Android%20app/img_6.png)
+
+---
+# Practice
+---
+![img.png](Unit1/Practice/img.png)
+![img_1.png](Unit1/Practice/img_1.png)
