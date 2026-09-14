@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -94,6 +93,67 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
 @Composable
 fun BirthdayCardPreview() {
     KNRTUMobileSystemsTheme {
-        GreetingImage(message = stringResource(R.string.happy_birthday_sam), from = stringResource(R.string.from_emma))
+//        GreetingImage(message = stringResource(R.string.happy_birthday_sam), from = stringResource(R.string.from_emma))
+        ComposeArticleImage(
+            image = R.drawable.compose_artile_image,
+            title = stringResource(R.string.compose_article_title),
+            summary = stringResource(R.string.compose_article_summary),
+            content = stringResource(R.string.compose_article_content)
+
+        )
     }
+}
+
+@Composable
+fun ComposeArticle(
+    image: Int,
+    title: String,
+    summary: String,
+    content: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+    ) {
+        Image(
+            painter = painterResource(image),
+            contentDescription = null,
+            contentScale = ContentScale.FillWidth,
+        )
+        Text(
+            text = title,
+            fontSize = 24.sp,
+            textAlign = TextAlign.Justify,
+            modifier = Modifier.padding(16.dp)
+        )
+        Text(
+            text = summary,
+            textAlign = TextAlign.Justify,
+            modifier = Modifier
+                .padding(16.dp, 16.dp)
+        )
+        Text(
+            text = content,
+            textAlign = TextAlign.Justify,
+            modifier = Modifier
+                .padding(16.dp, 16.dp)
+        )
+    }
+}
+
+@Composable
+fun ComposeArticleImage(
+    image: Int,
+    title: String,
+    summary: String,
+    content: String,
+    modifier: Modifier = Modifier
+) {
+
+    Box(modifier) {
+        ComposeArticle(
+            image, title, summary, content, modifier
+        )
+    }
+
 }
