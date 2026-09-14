@@ -214,4 +214,7 @@
 # Practice
 ---
 ![img.png](Unit1/Practice/img.png)
+
 ![img_1.png](Unit1/Practice/img_1.png)
+
+![img_2.png](Unit1/Practice/img_2.png)
