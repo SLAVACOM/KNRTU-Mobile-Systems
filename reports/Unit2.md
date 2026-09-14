@@ -93,5 +93,23 @@
 ![img_10.png](Unit2/Use%20function%20types%20and%20lambda%20expressions%20in%20Kotlin/img_10.png)
 
 ---
+# Practice: Kotlin Fundamentals
+---
+
+![img.png](Unit2/Practice%20Kotlin%20Fundamentals/img.png)
+
+![img_1.png](Unit2/Practice%20Kotlin%20Fundamentals/img_1.png)
+
+![img_2.png](Unit2/Practice%20Kotlin%20Fundamentals/img_2.png)
+
+![img_3.png](Unit2/Practice%20Kotlin%20Fundamentals/img_3.png)
+
+![img_4.png](Unit2/Practice%20Kotlin%20Fundamentals/img_4.png)
+
+![img_5.png](Unit2/Practice%20Kotlin%20Fundamentals/img_5.png)
+
+![img_6.png](Unit2/Practice%20Kotlin%20Fundamentals/img_6.png)
+
+---
 #
 ---
