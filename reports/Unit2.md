@@ -111,5 +111,13 @@
 ![img_6.png](Unit2/Practice%20Kotlin%20Fundamentals/img_6.png)
 
 ---
+# Dice Roller
+---
+
+![img.png](Unit2/Dice%20Roller/img.png)
+
+![img_1.png](Unit2/Dice%20Roller/img_1.png)
+
+---
 #
 ---
