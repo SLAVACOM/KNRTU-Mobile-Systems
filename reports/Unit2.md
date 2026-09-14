@@ -50,6 +50,25 @@
 ![img_10.png](Unit2/Use%20nullability%20in%20Kotlin/img_10.png)
 
 ![img_11.png](Unit2/Use%20nullability%20in%20Kotlin/img_11.png)
+
+---
+# Use classes and objects in Kotlin
+---
+![img.png](Unit2/Use%20classes%20and%20objects%20in%20Kotlin/img.png)
+
+![img_1.png](Unit2/Use%20classes%20and%20objects%20in%20Kotlin/img_1.png)
+
+![img_2.png](Unit2/Use%20classes%20and%20objects%20in%20Kotlin/img_2.png)
+
+![img_3.png](Unit2/Use%20classes%20and%20objects%20in%20Kotlin/img_3.png)
+
+![img_4.png](Unit2/Use%20classes%20and%20objects%20in%20Kotlin/img_4.png)
+
+![img_5.png](Unit2/Use%20classes%20and%20objects%20in%20Kotlin/img_5.png)
+
+
+
+
 ---
 #
 ---
