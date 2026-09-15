@@ -71,9 +71,21 @@
 ![img_22.png](Use%20collections%20in%20Kotlin/img_22.png)---
 
 ---
-#
+# Higher-order functions with collections
 ---
+![img.png](Higher-order%20functions%20with%20collections/img.png)
 
+![img_1.png](Higher-order%20functions%20with%20collections/img_1.png)
+
+![img_2.png](Higher-order%20functions%20with%20collections/img_2.png)
+
+![img_3.png](Higher-order%20functions%20with%20collections/img_3.png)
+
+![img_4.png](Higher-order%20functions%20with%20collections/img_4.png)
+
+![img_5.png](Higher-order%20functions%20with%20collections/img_5.png)
+
+![img_6.png](Higher-order%20functions%20with%20collections/img_6.png)
 ---
 #
 ---
