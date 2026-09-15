@@ -25,6 +25,10 @@
 ![img_4.png](Change%20the%20app%20icon/img_4.png)
 
 ![img_5.png](Change%20the%20app%20icon/img_5.png)
+
 ---
-# 
+# Practice: Build a grid
 ---
+![img_1.png](Practice%20Build%20a%20grid/img_1.png)
+
+![img.png](Practice%20Build%20a%20grid/img.png)
