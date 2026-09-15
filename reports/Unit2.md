@@ -119,5 +119,12 @@
 ![img_1.png](Unit2/Dice%20Roller/img_1.png)
 
 ---
+# basic-android-kotlin-compose-calculate-tip
+---
+
+
+
+
+---
 #
 ---
