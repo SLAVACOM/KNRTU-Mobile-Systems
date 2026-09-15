@@ -86,10 +86,20 @@
 ![img_5.png](Higher-order%20functions%20with%20collections/img_5.png)
 
 ![img_6.png](Higher-order%20functions%20with%20collections/img_6.png)
----
-#
----
 
 ---
-#
+# Practice:Classes and Collections
 ---
+![img.png](Practice%20Classes%20and%20Collections/img.png)
+
+![img_1.png](Practice%20Classes%20and%20Collections/img_1.png)
+
+![img_2.png](Practice%20Classes%20and%20Collections/img_2.png)
+
+![img_3.png](Practice%20Classes%20and%20Collections/img_3.png)
+
+![img_4.png](Practice%20Classes%20and%20Collections/img_4.png)
+
+![img_5.png](Practice%20Classes%20and%20Collections/img_5.png)
+
+![img_6.png](Practice%20Classes%20and%20Collections/img_6.png)
