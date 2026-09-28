@@ -22,7 +22,10 @@ private val DarkColorScheme = darkColorScheme(
     secondary = RecipesSecondaryDark,
     tertiary = RecipesTertiaryDark,
     background = RecipesBackgroundDark,
+    onBackground = RecipesOnBackgroundDark,
     surface = RecipesSurfaceDark,
+    onSurface = RecipesOnSurfaceDark,
+    surfaceVariant = RecipesSurfaceVariantDark,
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -32,7 +35,10 @@ private val LightColorScheme = lightColorScheme(
     secondary = RecipesSecondaryLight,
     tertiary = RecipesTertiaryLight,
     background = RecipesBackgroundLight,
+    onBackground = RecipesOnBackgroundLight,
     surface = RecipesSurfaceLight,
+    onSurface = RecipesOnSurfaceLight,
+    surfaceVariant = RecipesSurfaceVariantLight,
 )
 
 @Composable

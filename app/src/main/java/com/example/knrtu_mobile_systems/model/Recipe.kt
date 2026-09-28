@@ -40,5 +40,6 @@ enum class RecipeCategory(
 data class Recipe(
     val day: Int,
     @StringRes val nameResId: Int,
+    @StringRes val descriptionResId: Int,
     val category: RecipeCategory
 )

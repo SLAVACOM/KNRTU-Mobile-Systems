@@ -95,4 +95,38 @@
     <string name="recipe_name_28">Тирамису</string>
     <string name="recipe_name_29">Домашняя шаурма</string>
     <string name="recipe_name_30">Стейк с запечённым картофелем</string>
+
+    <string name="recipe_description_1">Спагетти с хрустящим беконом, чесноком и сливочно-сырным соусом на основе яиц и пармезана.</string>
+    <string name="recipe_description_2">Сочные кусочки курицы в карамелизированном соусе терияки, поданные с рассыпчатым рисом.</string>
+    <string name="recipe_description_3">Наваристый свекольный суп с говядиной, капустой и морковью, подаётся со сметаной и зеленью.</string>
+    <string name="recipe_description_4">Тонкое тесто, томатный соус, моцарелла и свежий базилик — классика неаполитанской кухни.</string>
+    <string name="recipe_description_5">Хрустящий салат ромэн с курицей гриль, пармезаном, сухариками и соусом цезарь.</string>
+    <string name="recipe_description_6">Тонкие блины с нежной творожной начинкой, подаются со сметаной или вареньем.</string>
+    <string name="recipe_description_7">Рассыпчатый рис с куриным мясом, морковью и специями, приготовленный в казане.</string>
+    <string name="recipe_description_8">Нежный сливочный суп-пюре из шампиньонов с добавлением чеснока и трав.</string>
+    <string name="recipe_description_9">Слои пасты с мясным рагу, бешамелем и сыром, запечённые до золотистой корочки.</string>
+    <string name="recipe_description_10">Яйца, запечённые в пряном томатном соусе с болгарским перцем и специями.</string>
+    <string name="recipe_description_11">Сочные мясные котлеты с нежным картофельным пюре и сливочным соусом.</string>
+    <string name="recipe_description_12">Острый и кислый тайский суп с креветками, грибами, лемонграссом и кокосовым молоком.</string>
+    <string name="recipe_description_13">Свежие овощи, оливки и сыр фета, заправленные оливковым маслом и орегано.</string>
+    <string name="recipe_description_14">Нежный сливочный десерт на песочной основе с лёгкой кислинкой.</string>
+    <string name="recipe_description_15">Паста в сливочном соусе с кусочками слабосолёного лосося и укропом.</string>
+    <string name="recipe_description_16">Тушёные сезонные овощи в ароматном томатном соусе с травами.</string>
+    <string name="recipe_description_17">Румяные творожные сырники со сметаной, мёдом или ягодным соусом.</string>
+    <string name="recipe_description_18">Тушёная говядина в густом соусе с паприкой, подаётся с гречневой кашей.</string>
+    <string name="recipe_description_19">Насыщенный мясной суп с солёными огурцами, оливками и лимоном.</string>
+    <string name="recipe_description_20">Сочная говяжья котлета, свежие овощи и соус в мягкой булочке.</string>
+    <string name="recipe_description_21">Спагетти с насыщенным мясным соусом на основе томатов и овощей.</string>
+    <string name="recipe_description_22">Куриные бёдра, запечённые с картофелем и овощами до румяной корочки.</string>
+    <string name="recipe_description_23">Классический салат с варёным картофелем, морковью, яйцом, горошком и майонезом.</string>
+    <string name="recipe_description_24">Пышный омлет с сыром, помидорами и свежей зеленью.</string>
+    <string name="recipe_description_25">Нежное филе рыбы, запечённое в сливочно-чесночном соусе.</string>
+    <string name="recipe_description_26">Лодочка из дрожжевого теста с сыром, яйцом и сливочным маслом.</string>
+    <string name="recipe_description_27">Кремовый рис арборио с лесными грибами и пармезаном.</string>
+    <string name="recipe_description_28">Итальянский десерт из маскарпоне, кофе и печенья савоярди.</string>
+    <string name="recipe_description_29">Лаваш с курицей, свежими овощами и пряным соусом.</string>
+    <string name="recipe_description_30">Сочный говяжий стейк с ароматным запечённым картофелем и травами.</string>
+
+    <string name="expand_button_content_description">Развернуть или свернуть рецепт.</string>
+    <string name="recipe_image_content_description">Фото блюда: %1$s</string>
 </resources>
