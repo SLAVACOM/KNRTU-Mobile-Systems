@@ -7,13 +7,14 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -44,8 +45,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -106,7 +109,7 @@ fun RecipesApp() {
 
 /**
  * Expandable list item for a single day's recipe: a thumbnail, day/name/category always
- * visible, and a bigger picture plus the recipe description revealed on tap.
+ * visible, and a bigger photo plus the recipe description revealed on tap.
  */
 @Composable
 fun RecipeListItem(
@@ -119,6 +122,7 @@ fun RecipeListItem(
         label = "expandArrowRotation"
     )
 
+    // Flat card: no shadow, cards read against the background purely through color contrast.
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -130,7 +134,7 @@ fun RecipeListItem(
             ),
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Column(
             modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium))
@@ -172,7 +176,7 @@ fun RecipeListItem(
                 }
             }
             if (expanded) {
-                RecipeBanner(
+                RecipePhoto(
                     recipe = recipe,
                     modifier = Modifier.padding(top = dimensionResource(R.dimen.padding_medium))
                 )
@@ -188,64 +192,74 @@ fun RecipeListItem(
 }
 
 /**
- * Small round "picture" of the dish shown in the collapsed row, tinted by its category.
+ * Round photo of the dish shown in the collapsed row, with a small category badge overlaid.
  */
 @Composable
 fun RecipeThumbnail(
     recipe: Recipe,
     modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier = modifier
-            .size(dimensionResource(R.dimen.image_size))
-            .background(
-                color = recipe.category.color.copy(alpha = 0.18f),
-                shape = CircleShape
-            ),
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            imageVector = recipe.category.icon,
+    Box(modifier = modifier.size(dimensionResource(R.dimen.image_size))) {
+        Image(
+            painter = painterResource(recipe.imageResId),
             contentDescription = stringResource(
                 R.string.recipe_image_content_description,
                 stringResource(recipe.nameResId)
             ),
-            tint = recipe.category.color
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(CircleShape)
+        )
+        CategoryBadge(
+            recipe = recipe,
+            modifier = Modifier.align(Alignment.BottomEnd)
         )
     }
 }
 
 /**
- * Large "picture" banner shown when a recipe is expanded.
+ * Large photo of the dish shown when a recipe is expanded.
  */
 @Composable
-fun RecipeBanner(
+fun RecipePhoto(
+    recipe: Recipe,
+    modifier: Modifier = Modifier
+) {
+    Image(
+        painter = painterResource(recipe.imageResId),
+        contentDescription = stringResource(
+            R.string.recipe_image_content_description,
+            stringResource(recipe.nameResId)
+        ),
+        contentScale = ContentScale.Crop,
+        modifier = modifier
+            .fillMaxWidth()
+            .height(dimensionResource(R.dimen.recipe_banner_height))
+            .clip(MaterialTheme.shapes.medium)
+    )
+}
+
+/**
+ * Small colored circle with the category icon, used as a badge on top of a recipe photo.
+ */
+@Composable
+fun CategoryBadge(
     recipe: Recipe,
     modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier
-            .fillMaxWidth()
-            .height(dimensionResource(R.dimen.recipe_banner_height))
-            .clip(MaterialTheme.shapes.medium)
-            .background(
-                Brush.linearGradient(
-                    colors = listOf(
-                        recipe.category.color.copy(alpha = 0.35f),
-                        recipe.category.color.copy(alpha = 0.12f)
-                    )
-                )
-            ),
+            .size(20.dp)
+            .background(color = recipe.category.color, shape = CircleShape)
+            .border(1.5.dp, MaterialTheme.colorScheme.surface, CircleShape),
         contentAlignment = Alignment.Center
     ) {
         Icon(
             imageVector = recipe.category.icon,
-            contentDescription = stringResource(
-                R.string.recipe_image_content_description,
-                stringResource(recipe.nameResId)
-            ),
-            tint = recipe.category.color,
-            modifier = Modifier.size(64.dp)
+            contentDescription = null,
+            tint = Color.White,
+            modifier = Modifier.size(12.dp)
         )
     }
 }

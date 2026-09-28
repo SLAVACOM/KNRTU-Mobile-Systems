@@ -1,5 +1,6 @@
 package com.example.knrtu_mobile_systems.model
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BakeryDining
@@ -41,5 +42,6 @@ data class Recipe(
     val day: Int,
     @StringRes val nameResId: Int,
     @StringRes val descriptionResId: Int,
+    @DrawableRes val imageResId: Int,
     val category: RecipeCategory
 )
