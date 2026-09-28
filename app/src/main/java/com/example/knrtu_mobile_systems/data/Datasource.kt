@@ -1,39 +1,45 @@
-/*
- * Copyright (C) 2023 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.example.knrtu_mobile_systems.data
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import com.example.knrtu_mobile_systems.R
+import com.example.knrtu_mobile_systems.model.Recipe
+import com.example.knrtu_mobile_systems.model.RecipeCategory.BAKING
+import com.example.knrtu_mobile_systems.model.RecipeCategory.BREAKFAST
+import com.example.knrtu_mobile_systems.model.RecipeCategory.DESSERT
+import com.example.knrtu_mobile_systems.model.RecipeCategory.FASTFOOD
+import com.example.knrtu_mobile_systems.model.RecipeCategory.MAIN
+import com.example.knrtu_mobile_systems.model.RecipeCategory.PASTA
+import com.example.knrtu_mobile_systems.model.RecipeCategory.SALAD
+import com.example.knrtu_mobile_systems.model.RecipeCategory.SOUP
 
-data class Dog(
-    @DrawableRes val imageResourceId: Int,
-    @StringRes val name: Int,
-    val age: Int,
-    @StringRes val hobbies: Int
-)
-
-val dogs = listOf(
-    Dog(R.drawable.koda, R.string.dog_name_1, 2, R.string.dog_description_1),
-    Dog(R.drawable.lola, R.string.dog_name_2, 16, R.string.dog_description_2),
-    Dog(R.drawable.frankie, R.string.dog_name_3, 2, R.string.dog_description_3),
-    Dog(R.drawable.nox, R.string.dog_name_4, 8, R.string.dog_description_4),
-    Dog(R.drawable.faye, R.string.dog_name_5, 8, R.string.dog_description_5),
-    Dog(R.drawable.bella, R.string.dog_name_6, 14, R.string.dog_description_6),
-    Dog(R.drawable.moana, R.string.dog_name_7, 2, R.string.dog_description_7),
-    Dog(R.drawable.tzeitel, R.string.dog_name_8, 7, R.string.dog_description_8),
-    Dog(R.drawable.leroy, R.string.dog_name_9, 4, R.string.dog_description_9)
+val recipes = listOf(
+    Recipe(1, R.string.recipe_name_1, PASTA),
+    Recipe(2, R.string.recipe_name_2, MAIN),
+    Recipe(3, R.string.recipe_name_3, SOUP),
+    Recipe(4, R.string.recipe_name_4, BAKING),
+    Recipe(5, R.string.recipe_name_5, SALAD),
+    Recipe(6, R.string.recipe_name_6, BREAKFAST),
+    Recipe(7, R.string.recipe_name_7, MAIN),
+    Recipe(8, R.string.recipe_name_8, SOUP),
+    Recipe(9, R.string.recipe_name_9, PASTA),
+    Recipe(10, R.string.recipe_name_10, BREAKFAST),
+    Recipe(11, R.string.recipe_name_11, MAIN),
+    Recipe(12, R.string.recipe_name_12, SOUP),
+    Recipe(13, R.string.recipe_name_13, SALAD),
+    Recipe(14, R.string.recipe_name_14, DESSERT),
+    Recipe(15, R.string.recipe_name_15, PASTA),
+    Recipe(16, R.string.recipe_name_16, MAIN),
+    Recipe(17, R.string.recipe_name_17, BREAKFAST),
+    Recipe(18, R.string.recipe_name_18, MAIN),
+    Recipe(19, R.string.recipe_name_19, SOUP),
+    Recipe(20, R.string.recipe_name_20, FASTFOOD),
+    Recipe(21, R.string.recipe_name_21, PASTA),
+    Recipe(22, R.string.recipe_name_22, MAIN),
+    Recipe(23, R.string.recipe_name_23, SALAD),
+    Recipe(24, R.string.recipe_name_24, BREAKFAST),
+    Recipe(25, R.string.recipe_name_25, MAIN),
+    Recipe(26, R.string.recipe_name_26, BAKING),
+    Recipe(27, R.string.recipe_name_27, MAIN),
+    Recipe(28, R.string.recipe_name_28, DESSERT),
+    Recipe(29, R.string.recipe_name_29, FASTFOOD),
+    Recipe(30, R.string.recipe_name_30, MAIN),
 )

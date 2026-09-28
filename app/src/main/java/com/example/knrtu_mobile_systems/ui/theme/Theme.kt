@@ -16,21 +16,29 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = RecipesPrimaryDark,
+    onPrimary = RecipesOnPrimaryDark,
+    primaryContainer = RecipesPrimaryContainerDark,
+    secondary = RecipesSecondaryDark,
+    tertiary = RecipesTertiaryDark,
+    background = RecipesBackgroundDark,
+    surface = RecipesSurfaceDark,
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = RecipesPrimaryLight,
+    onPrimary = RecipesOnPrimaryLight,
+    primaryContainer = RecipesPrimaryContainerLight,
+    secondary = RecipesSecondaryLight,
+    tertiary = RecipesTertiaryLight,
+    background = RecipesBackgroundLight,
+    surface = RecipesSurfaceLight,
 )
 
 @Composable
-fun WoofTheme(
+fun RecipesTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
+    // Dynamic color is disabled on purpose so the app keeps its own brand palette.
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {

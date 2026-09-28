@@ -3,53 +3,58 @@ package com.example.knrtu_mobile_systems
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.spring
-import androidx.compose.foundation.Image
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.knrtu_mobile_systems.ui.theme.WoofTheme
-import com.example.knrtu_mobile_systems.data.Dog
-import com.example.knrtu_mobile_systems.data.dogs
+import androidx.compose.ui.unit.dp
+import com.example.knrtu_mobile_systems.data.recipes
+import com.example.knrtu_mobile_systems.model.Recipe
+import com.example.knrtu_mobile_systems.ui.theme.RecipesTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WoofTheme {
-                // A surface container using the 'background' color from the theme
+            RecipesTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    WoofApp()
+                    RecipesApp()
                 }
             }
         }
@@ -57,157 +62,115 @@ class MainActivity : ComponentActivity() {
 }
 
 /**
- * Composable that displays an app bar and a list of dogs.
+ * Top-level composable: an app bar plus a two-column grid of the 30 daily recipes.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WoofApp() {
-    LazyColumn {
-        items(dogs) {
-            DogItem(dog = it)
-        }
-    }
-}
-
-/**
- * Composable that displays a list item containing a dog icon and their information.
- *
- * @param dog contains the data that populates the list item
- * @param modifier modifiers to set to this composable
- */
-@Composable
-fun DogItem(
-    dog: Dog,
-    modifier: Modifier = Modifier
-) {
-    var expanded by remember { mutableStateOf(false) }
-    Card(
-        modifier = modifier
-    ) {
-        Column( modifier = Modifier.animateContentSize(
-            animationSpec = spring(
-                dampingRatio = Spring.DampingRatioNoBouncy,
-                stiffness = Spring.StiffnessMedium
-            )
-        )) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(dimensionResource(R.dimen.padding_small))
-            ) {
-                DogIcon(dog.imageResourceId)
-                DogInformation(dog.name, dog.age)
-                Spacer(Modifier.weight(1f))
-                DogItemButton(
-                    expanded = expanded,
-                    onClick = { expanded = !expanded },
-                )
-            }
-            if (expanded) {
-                DogHobby(
-                    dog.hobbies, modifier = Modifier.padding(
-                        start = dimensionResource(R.dimen.padding_medium),
-                        top = dimensionResource(R.dimen.padding_small),
-                        end = dimensionResource(R.dimen.padding_medium),
-                        bottom = dimensionResource(R.dimen.padding_medium)
+fun RecipesApp() {
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        text = stringResource(R.string.app_title),
+                        style = MaterialTheme.typography.headlineSmall
                     )
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
                 )
+            )
+        }
+    ) { innerPadding ->
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            contentPadding = PaddingValues(dimensionResource(R.dimen.padding_medium)),
+            horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.grid_spacing)),
+            verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.grid_spacing)),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+        ) {
+            items(recipes) { recipe ->
+                RecipeCard(recipe = recipe)
             }
         }
     }
 }
 
 /**
- * Composable that displays a photo of a dog.
- *
- * @param dogIcon is the resource ID for the image of the dog
- * @param modifier modifiers to set to this composable
+ * Card for a single day's recipe. Scales down slightly on touch-and-hold for tactile feedback.
  */
 @Composable
-fun DogIcon(
-    @DrawableRes dogIcon: Int,
+fun RecipeCard(
+    recipe: Recipe,
     modifier: Modifier = Modifier
 ) {
-    Image(
-        modifier = modifier
-            .size(dimensionResource(R.dimen.image_size))
-            .padding(dimensionResource(R.dimen.padding_small)),
-        painter = painterResource(dogIcon),
-
-        // Content Description is not needed here - image is decorative, and setting a null content
-        // description allows accessibility services to skip this element during navigation.
-
-        contentDescription = null
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed) 0.95f else 1f,
+        label = "recipeCardScale"
     )
-}
 
-/**
- * Composable that displays a dog's name and age.
- *
- * @param dogName is the resource ID for the string of the dog's name
- * @param dogAge is the Int that represents the dog's age
- * @param modifier modifiers to set to this composable
- */
-@Composable
-fun DogInformation(
-    @StringRes dogName: Int,
-    dogAge: Int,
-    modifier: Modifier = Modifier
-) {
-    Column(modifier = modifier) {
-        Text(
-            text = stringResource(dogName),
-            modifier = Modifier.padding(top = dimensionResource(R.dimen.padding_small))
-        )
-        Text(
-            text = stringResource(R.string.years_old, dogAge),
-        )
+    Card(
+        onClick = {},
+        interactionSource = interactionSource,
+        modifier = modifier.graphicsLayer(scaleX = scale, scaleY = scale),
+        shape = MaterialTheme.shapes.medium,
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(R.dimen.padding_medium))
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(dimensionResource(R.dimen.icon_circle_size))
+                    .background(
+                        color = recipe.category.color.copy(alpha = 0.18f),
+                        shape = CircleShape
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = recipe.category.icon,
+                    contentDescription = stringResource(recipe.category.labelResId),
+                    tint = recipe.category.color
+                )
+            }
+            Spacer(Modifier.height(dimensionResource(R.dimen.padding_small)))
+            Text(
+                text = stringResource(R.string.day_label, recipe.day),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Text(
+                text = stringResource(recipe.nameResId),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                maxLines = 2,
+                modifier = Modifier.padding(top = 2.dp)
+            )
+            Spacer(Modifier.height(dimensionResource(R.dimen.padding_small)))
+            Text(
+                text = stringResource(recipe.category.labelResId),
+                style = MaterialTheme.typography.bodySmall,
+                color = recipe.category.color
+            )
+        }
     }
 }
 
 /**
- * Composable that displays what the UI of the app looks like in light theme in the design tab.
+ * Preview of what the UI looks like in light theme in the design tab.
  */
 @Preview
 @Composable
-fun WoofPreview() {
-    WoofTheme(darkTheme = false) {
-        WoofApp()
-    }
-}
-
-@Composable
-fun DogHobby(
-    @StringRes dogHobby: Int,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier
-    ) {
-        Text(
-            text = stringResource(R.string.about),
-            style = MaterialTheme.typography.labelSmall
-        )
-        Text(
-            text = stringResource(dogHobby),
-            style = MaterialTheme.typography.bodyLarge
-        )
-    }
-}
-
-@Composable
-private fun DogItemButton(
-    expanded: Boolean,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    IconButton(
-        onClick = onClick,
-        modifier = modifier
-    ) {
-        Icon(
-            imageVector = Icons.Filled.ExpandMore,
-            tint = MaterialTheme.colorScheme.secondary,
-            contentDescription = stringResource(R.string.expand_button_content_description)
-        )
+fun RecipesAppPreview() {
+    RecipesTheme(darkTheme = false) {
+        RecipesApp()
     }
 }
