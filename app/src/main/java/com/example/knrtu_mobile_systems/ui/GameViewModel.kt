@@ -4,9 +4,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.example.knrtu_mobile_systems.data.Datasource.MAX_NO_OF_WORDS
-import com.example.knrtu_mobile_systems.data.Datasource.SCORE_INCREASE
-import com.example.knrtu_mobile_systems.data.Datasource.allWords
+import com.example.knrtu_mobile_systems.data.MAX_NO_OF_WORDS
+import com.example.knrtu_mobile_systems.data.SCORE_INCREASE
+import com.example.knrtu_mobile_systems.data.allWords
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
