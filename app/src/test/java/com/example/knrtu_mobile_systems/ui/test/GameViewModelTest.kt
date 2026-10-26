@@ -3,7 +3,6 @@ package com.example.knrtu_mobile_systems.ui.test
 import com.example.knrtu_mobile_systems.data.MAX_NO_OF_WORDS
 import com.example.knrtu_mobile_systems.data.SCORE_INCREASE
 import com.example.knrtu_mobile_systems.data.getUnscrambledWord
-import com.example.knrtu_mobile_systems.ui.GameViewModel
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
