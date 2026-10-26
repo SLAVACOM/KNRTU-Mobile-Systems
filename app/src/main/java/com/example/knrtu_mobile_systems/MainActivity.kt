@@ -1,41 +1,40 @@
 package com.example.knrtu_mobile_systems
 
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
+import androidx.activity.enableEdgeToEdge
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExpandMore
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,29 +42,32 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.example.knrtu_mobile_systems.data.recipes
-import com.example.knrtu_mobile_systems.model.Recipe
-import com.example.knrtu_mobile_systems.ui.theme.RecipesTheme
+import androidx.core.content.ContextCompat
+import com.example.knrtu_mobile_systems.data.Datasource
+import com.example.knrtu_mobile_systems.model.Dessert
+import com.example.knrtu_mobile_systems.ui.theme.DessertClickerTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
-            RecipesTheme {
+            DessertClickerTheme {
+                // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .statusBarsPadding(),
                 ) {
-                    RecipesApp()
+                    DessertClickerApp(desserts = Datasource.dessertList)
                 }
             }
         }
@@ -73,204 +75,249 @@ class MainActivity : ComponentActivity() {
 }
 
 /**
- * Top-level composable: an app bar plus a scrollable, expandable list of the 30 daily recipes.
+ * Determine which dessert to show.
  */
-@OptIn(ExperimentalMaterial3Api::class)
+fun determineDessertToShow(
+    desserts: List<Dessert>,
+    dessertsSold: Int
+): Dessert {
+    var dessertToShow = desserts.first()
+    for (dessert in desserts) {
+        if (dessertsSold >= dessert.startProductionAmount) {
+            dessertToShow = dessert
+        } else {
+            // The list of desserts is sorted by startProductionAmount. As you sell more desserts,
+            // you'll start producing more expensive desserts as determined by startProductionAmount
+            // We know to break as soon as we see a dessert who's "startProductionAmount" is greater
+            // than the amount sold.
+            break
+        }
+    }
+
+    return dessertToShow
+}
+
+/**
+ * Share desserts sold information using ACTION_SEND intent
+ */
+private fun shareSoldDessertsInformation(intentContext: Context, dessertsSold: Int, revenue: Int) {
+    val sendIntent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(
+            Intent.EXTRA_TEXT,
+            intentContext.getString(R.string.share_text, dessertsSold, revenue)
+        )
+        type = "text/plain"
+    }
+
+    val shareIntent = Intent.createChooser(sendIntent, null)
+
+    try {
+        ContextCompat.startActivity(intentContext, shareIntent, null)
+    } catch (e: ActivityNotFoundException) {
+        Toast.makeText(
+            intentContext,
+            intentContext.getString(R.string.sharing_not_available),
+            Toast.LENGTH_LONG
+        ).show()
+    }
+}
+
 @Composable
-fun RecipesApp() {
+private fun DessertClickerApp(
+    desserts: List<Dessert>
+) {
+
+    var revenue by remember { mutableStateOf(0) }
+    var dessertsSold by remember { mutableStateOf(0) }
+
+    val currentDessertIndex by remember { mutableStateOf(0) }
+
+    var currentDessertPrice by remember {
+        mutableStateOf(desserts[currentDessertIndex].price)
+    }
+    var currentDessertImageId by remember {
+        mutableStateOf(desserts[currentDessertIndex].imageId)
+    }
+
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(R.string.app_title),
-                        style = MaterialTheme.typography.headlineSmall
+            val intentContext = LocalContext.current
+            val layoutDirection = LocalLayoutDirection.current
+            DessertClickerAppBar(
+                onShareButtonClicked = {
+                    shareSoldDessertsInformation(
+                        intentContext = intentContext,
+                        dessertsSold = dessertsSold,
+                        revenue = revenue
                     )
                 },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                )
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = WindowInsets.safeDrawing.asPaddingValues()
+                            .calculateStartPadding(layoutDirection),
+                        end = WindowInsets.safeDrawing.asPaddingValues()
+                            .calculateEndPadding(layoutDirection),
+                    )
+                    .background(MaterialTheme.colorScheme.primary)
             )
         }
-    ) { innerPadding ->
-        LazyColumn(
-            contentPadding = PaddingValues(dimensionResource(R.dimen.padding_medium)),
-            verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.grid_spacing)),
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-        ) {
-            items(recipes) { recipe ->
-                RecipeListItem(recipe = recipe)
-            }
-        }
+    ) { contentPadding ->
+        DessertClickerScreen(
+            revenue = revenue,
+            dessertsSold = dessertsSold,
+            dessertImageId = currentDessertImageId,
+            onDessertClicked = {
+
+                // Update the revenue
+                revenue += currentDessertPrice
+                dessertsSold++
+
+                // Show the next dessert
+                val dessertToShow = determineDessertToShow(desserts, dessertsSold)
+                currentDessertImageId = dessertToShow.imageId
+                currentDessertPrice = dessertToShow.price
+            },
+            modifier = Modifier.padding(contentPadding)
+        )
     }
 }
 
-/**
- * Expandable list item for a single day's recipe: a thumbnail, day/name/category always
- * visible, and a bigger photo plus the recipe description revealed on tap.
- */
 @Composable
-fun RecipeListItem(
-    recipe: Recipe,
+private fun DessertClickerAppBar(
+    onShareButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var expanded by remember { mutableStateOf(false) }
-    val rotation by animateFloatAsState(
-        targetValue = if (expanded) 180f else 0f,
-        label = "expandArrowRotation"
-    )
-
-    // Flat card: no shadow, cards read against the background purely through color contrast.
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .animateContentSize(
-                animationSpec = spring(
-                    dampingRatio = Spring.DampingRatioNoBouncy,
-                    stiffness = Spring.StiffnessMedium
-                )
-            ),
-        shape = MaterialTheme.shapes.medium,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        Column(
-            modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium))
+        Text(
+            text = stringResource(R.string.app_name),
+            modifier = Modifier.padding(start = dimensionResource(R.dimen.padding_medium)),
+            color = MaterialTheme.colorScheme.onPrimary,
+            style = MaterialTheme.typography.titleLarge,
+        )
+        IconButton(
+            onClick = onShareButtonClicked,
+            modifier = Modifier.padding(end = dimensionResource(R.dimen.padding_medium)),
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                RecipeThumbnail(recipe = recipe)
-                Column(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(horizontal = dimensionResource(R.dimen.padding_medium))
-                ) {
-                    Text(
-                        text = stringResource(R.string.day_label, recipe.day),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                    Text(
-                        text = stringResource(recipe.nameResId),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        maxLines = 2
-                    )
-                    Text(
-                        text = stringResource(recipe.category.labelResId),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = recipe.category.color
-                    )
-                }
-                IconButton(onClick = { expanded = !expanded }) {
-                    Icon(
-                        imageVector = Icons.Filled.ExpandMore,
-                        tint = MaterialTheme.colorScheme.secondary,
-                        contentDescription = stringResource(R.string.expand_button_content_description),
-                        modifier = Modifier.rotate(rotation)
-                    )
-                }
-            }
-            if (expanded) {
-                RecipePhoto(
-                    recipe = recipe,
-                    modifier = Modifier.padding(top = dimensionResource(R.dimen.padding_medium))
-                )
-                Text(
-                    text = stringResource(recipe.descriptionResId),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.padding(top = dimensionResource(R.dimen.padding_small))
-                )
-            }
+            Icon(
+                imageVector = Icons.Filled.Share,
+                contentDescription = stringResource(R.string.share),
+                tint = MaterialTheme.colorScheme.onPrimary
+            )
         }
     }
 }
 
-/**
- * Round photo of the dish shown in the collapsed row, with a small category badge overlaid.
- */
 @Composable
-fun RecipeThumbnail(
-    recipe: Recipe,
+fun DessertClickerScreen(
+    revenue: Int,
+    dessertsSold: Int,
+    @DrawableRes dessertImageId: Int,
+    onDessertClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Box(modifier = modifier.size(dimensionResource(R.dimen.image_size))) {
+    Box(modifier = modifier) {
         Image(
-            painter = painterResource(recipe.imageResId),
-            contentDescription = stringResource(
-                R.string.recipe_image_content_description,
-                stringResource(recipe.nameResId)
-            ),
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxSize()
-                .clip(CircleShape)
-        )
-        CategoryBadge(
-            recipe = recipe,
-            modifier = Modifier.align(Alignment.BottomEnd)
-        )
-    }
-}
-
-/**
- * Large photo of the dish shown when a recipe is expanded.
- */
-@Composable
-fun RecipePhoto(
-    recipe: Recipe,
-    modifier: Modifier = Modifier
-) {
-    Image(
-        painter = painterResource(recipe.imageResId),
-        contentDescription = stringResource(
-            R.string.recipe_image_content_description,
-            stringResource(recipe.nameResId)
-        ),
-        contentScale = ContentScale.Crop,
-        modifier = modifier
-            .fillMaxWidth()
-            .height(dimensionResource(R.dimen.recipe_banner_height))
-            .clip(MaterialTheme.shapes.medium)
-    )
-}
-
-/**
- * Small colored circle with the category icon, used as a badge on top of a recipe photo.
- */
-@Composable
-fun CategoryBadge(
-    recipe: Recipe,
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier
-            .size(20.dp)
-            .background(color = recipe.category.color, shape = CircleShape)
-            .border(1.5.dp, MaterialTheme.colorScheme.surface, CircleShape),
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            imageVector = recipe.category.icon,
+            painter = painterResource(R.drawable.bakery_back),
             contentDescription = null,
-            tint = Color.White,
-            modifier = Modifier.size(12.dp)
+            contentScale = ContentScale.Crop
+        )
+        Column {
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth(),
+            ) {
+                Image(
+                    painter = painterResource(dessertImageId),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .width(dimensionResource(R.dimen.image_size))
+                        .height(dimensionResource(R.dimen.image_size))
+                        .align(Alignment.Center)
+                        .clickable { onDessertClicked() },
+                    contentScale = ContentScale.Crop,
+                )
+            }
+            TransactionInfo(
+                revenue = revenue,
+                dessertsSold = dessertsSold,
+                modifier = Modifier.background(MaterialTheme.colorScheme.secondaryContainer)
+            )
+        }
+    }
+}
+
+@Composable
+private fun TransactionInfo(
+    revenue: Int,
+    dessertsSold: Int,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier) {
+        DessertsSoldInfo(
+            dessertsSold = dessertsSold,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(R.dimen.padding_medium))
+        )
+        RevenueInfo(
+            revenue = revenue,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(R.dimen.padding_medium))
         )
     }
 }
 
-/**
- * Preview of what the UI looks like in light theme in the design tab.
- */
+@Composable
+private fun RevenueInfo(revenue: Int, modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        Text(
+            text = stringResource(R.string.total_revenue),
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onSecondaryContainer
+        )
+        Text(
+            text = "$${revenue}",
+            textAlign = TextAlign.Right,
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onSecondaryContainer
+        )
+    }
+}
+
+@Composable
+private fun DessertsSoldInfo(dessertsSold: Int, modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        Text(
+            text = stringResource(R.string.dessert_sold),
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onSecondaryContainer
+        )
+        Text(
+            text = dessertsSold.toString(),
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onSecondaryContainer
+        )
+    }
+}
+
 @Preview
 @Composable
-fun RecipesAppPreview() {
-    RecipesTheme(darkTheme = false) {
-        RecipesApp()
+fun MyDessertClickerAppPreview() {
+    DessertClickerTheme {
+        DessertClickerApp(listOf(Dessert(R.drawable.cupcake, 5, 0)))
     }
 }

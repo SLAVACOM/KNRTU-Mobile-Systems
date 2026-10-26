@@ -14,37 +14,27 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-
 private val DarkColorScheme = darkColorScheme(
-    primary = RecipesPrimaryDark,
-    onPrimary = RecipesOnPrimaryDark,
-    primaryContainer = RecipesPrimaryContainerDark,
-    secondary = RecipesSecondaryDark,
-    tertiary = RecipesTertiaryDark,
-    background = RecipesBackgroundDark,
-    onBackground = RecipesOnBackgroundDark,
-    surface = RecipesSurfaceDark,
-    onSurface = RecipesOnSurfaceDark,
-    surfaceVariant = RecipesSurfaceVariantDark,
+    primary = md_theme_dark_primary,
+    onPrimary = md_theme_dark_onPrimary,
+    secondaryContainer = md_theme_dark_secondaryContainer,
+    onSecondaryContainer = md_theme_dark_onSecondaryContainer,
+    background = md_theme_dark_background,
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = RecipesPrimaryLight,
-    onPrimary = RecipesOnPrimaryLight,
-    primaryContainer = RecipesPrimaryContainerLight,
-    secondary = RecipesSecondaryLight,
-    tertiary = RecipesTertiaryLight,
-    background = RecipesBackgroundLight,
-    onBackground = RecipesOnBackgroundLight,
-    surface = RecipesSurfaceLight,
-    onSurface = RecipesOnSurfaceLight,
-    surfaceVariant = RecipesSurfaceVariantLight,
+    primary = md_theme_light_primary,
+    onPrimary = md_theme_light_onPrimary,
+    secondaryContainer = md_theme_light_secondaryContainer,
+    onSecondaryContainer = md_theme_light_onSecondaryContainer,
+    background = md_theme_light_background,
 )
 
 @Composable
-fun RecipesTheme(
+fun DessertClickerTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is disabled on purpose so the app keeps its own brand palette.
+    // Dynamic color is available on Android 12+
+    // Dynamic color in this app is turned off for learning purposes
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
@@ -62,14 +52,13 @@ fun RecipesTheme(
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
+            window.navigationBarColor = colorScheme.secondaryContainer.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
-        shapes = Shapes,
         content = content
     )
 }

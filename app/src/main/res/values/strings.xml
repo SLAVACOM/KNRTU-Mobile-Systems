@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">KNRTU-Mobile-Systems</string>
     <string name="happy_birthday_sam">Happy Birthday Sam!</string>
     <string name="from_emma">From Emma</string>
     <string name="compose_article_title">Jetpack Compose tutorial</string>
@@ -129,4 +128,11 @@
 
     <string name="expand_button_content_description">Развернуть или свернуть рецепт.</string>
     <string name="recipe_image_content_description">Фото блюда: %1$s</string>
+
+    <string name="app_name">Dessert Clicker</string>
+    <string name="dessert_sold">Desserts sold</string>
+    <string name="total_revenue">Total Revenue</string>
+    <string name="share">Share</string>
+    <string name="share_text">I\'ve clicked %1$d Desserts for a total of $%2$d #AndroidDessertClicker</string>
+    <string name="sharing_not_available">Sharing Not Available</string>
 </resources>
