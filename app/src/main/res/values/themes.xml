@@ -2,5 +2,6 @@
 <resources>
     <style name="Theme.KNRTUMobileSystems" parent="android:Theme.Material.Light.NoActionBar" />
     <style name="Theme.DessertClicker" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.Unscramble" parent="android:Theme.Material.Light.NoActionBar" />
 
 </resources>
