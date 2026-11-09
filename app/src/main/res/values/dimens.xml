@@ -6,5 +6,5 @@
     <dimen name="list_icon_size">48dp</dimen>
     <dimen name="details_header_height">180dp</dimen>
     <dimen name="details_icon_size">96dp</dimen>
-    <dimen name="drawer_width">260dp</dimen>
+    <dimen name="drawer_width">300dp</dimen>
 </resources>
