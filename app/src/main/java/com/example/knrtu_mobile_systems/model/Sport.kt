@@ -13,23 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.knrtu_mobile_systems.data
+
+package com.example.knrtu_mobile_systems.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
 /**
- * A class which represents an account
+ * Data model for Sport
  */
-data class Account(
-    /** Unique ID of a user **/
-    val id: Long,
-    /** User's first name **/
-    @StringRes val firstName: Int,
-    /** User's last name **/
-    @StringRes val lastName: Int,
-    /** User's email address **/
-    @StringRes val email: Int,
-    /** User's avatar image resource id **/
-    @DrawableRes val avatar: Int
+data class Sport(
+    val id: Int,
+    @StringRes val titleResourceId: Int,
+    @StringRes val subtitleResourceId: Int,
+    val playerCount: Int,
+    val olympic: Boolean,
+    @DrawableRes val imageResourceId: Int,
+    @DrawableRes val sportsImageBanner: Int,
+    @StringRes val sportDetails: Int
 )

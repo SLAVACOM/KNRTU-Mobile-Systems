@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright 2023 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,18 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.knrtu_mobile_systems.ui.utils
 
-/**
- * Different type of navigation supported by app depending on size and state.
- */
-enum class ReplyNavigationType {
-    BOTTOM_NAVIGATION, NAVIGATION_RAIL, PERMANENT_NAVIGATION_DRAWER
-}
+package com.example.knrtu_mobile_systems.utils
 
 /**
  * Content shown depending on size and state of device.
  */
-enum class ReplyContentType {
-    LIST_ONLY, LIST_AND_DETAIL
+enum class SportsContentType {
+    ListOnly, ListAndDetail
 }
