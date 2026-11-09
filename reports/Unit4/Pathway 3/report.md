@@ -23,3 +23,18 @@
 Expanded: permanent navigation drawer + список и детали
 
 ![](reply_expanded_list_detail.png)
+
+## 3. Practice: Build Sports app
+- `SportsListAndDetails` — список и детали рядом (веса 2:3), превью на `Devices.TABLET`;
+  «Назад» на этом экране закрывает приложение (`(LocalContext.current as Activity).finish()`).
+- `material3-window-size-class`: `calculateWindowSizeClass` в `MainActivity`, в `SportsApp`
+  Expanded → `SportsContentType.ListAndDetail`, иначе `ListOnly`.
+- `SportsAppBar` на Expanded не показывает кнопку «Назад» и всегда показывает заголовок «Sports».
+
+| Compact: список | Compact: детали |
+|---|---|
+| ![](sports_compact_list.png) | ![](sports_compact_detail.png) |
+
+Expanded: список и детали
+
+![](sports_expanded.png)
