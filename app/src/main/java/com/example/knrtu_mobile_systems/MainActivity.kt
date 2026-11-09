@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      https://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,15 +18,51 @@ package com.example.knrtu_mobile_systems
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.example.knrtu_mobile_systems.ui.theme.LunchTrayTheme
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.knrtu_mobile_systems.ui.ReplyApp
+import com.example.knrtu_mobile_systems.ui.theme.ReplyTheme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
-            LunchTrayTheme {
-                LunchTrayApp()
+            ReplyTheme {
+                val layoutDirection = LocalLayoutDirection.current
+                Surface(
+                    modifier = Modifier
+                        .padding(
+                            start = WindowInsets.safeDrawing.asPaddingValues()
+                                .calculateStartPadding(layoutDirection),
+                            end = WindowInsets.safeDrawing.asPaddingValues()
+                                .calculateEndPadding(layoutDirection)
+                        )
+                ) {
+                    ReplyApp()
+                }
             }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ReplyAppCompactPreview() {
+    ReplyTheme {
+        Surface {
+            ReplyApp()
         }
     }
 }
