@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="category_sights">Достопримечательности</string>
+    <string name="category_museums">Музеи</string>
+    <string name="category_parks">Парки и набережные</string>
+    <string name="category_theatres">Театры</string>
+    <string name="category_food">Татарская кухня</string>
+
+    <string name="place_kremlin_name">Казанский Кремль</string>
+    <string name="place_kremlin_location">Кремлёвская ул.</string>
+    <string name="place_kremlin_description">Белокаменная крепость XVI века и объект Всемирного наследия ЮНЕСКО. На территории — мечеть Кул-Шариф, Благовещенский собор и падающая башня Сююмбике. Лучшие виды на Казанку открываются со смотровых площадок у южной стены.</string>
+    <string name="place_bauman_name">Улица Баумана</string>
+    <string name="place_bauman_location">Центр, от пл. Тукая до Кремля</string>
+    <string name="place_bauman_description">Главная пешеходная улица Казани: купеческие особняки, колокольня Богоявленского собора, уличные музыканты и бронзовые скульптуры. Отсюда удобно начинать прогулку к Кремлю.</string>
+    <string name="place_old_tatar_sloboda_name">Старо-Татарская слобода</string>
+    <string name="place_old_tatar_sloboda_location">Ул. Каюма Насыри и окрестности</string>
+    <string name="place_old_tatar_sloboda_description">Исторический татарский квартал с деревянными домами, старинными мечетями и уютными кафе. Здесь хорошо чувствуется атмосфера старой Казани.</string>
+    <string name="place_temple_name">Храм всех религий</string>
+    <string name="place_temple_location">Посёлок Старое Аракчино</string>
+    <string name="place_temple_description">Необычный архитектурный ансамбль, в облике которого соединены купола и элементы культовых зданий разных религий. Задуман как символ единства культур.</string>
+
+    <string name="place_national_museum_name">Национальный музей Республики Татарстан</string>
+    <string name="place_national_museum_location">Кремлёвская ул., 2</string>
+    <string name="place_national_museum_description">Крупнейший музей республики: археология, история и культура народов Поволжья, богатая нумизматическая коллекция и старинные рукописи.</string>
+    <string name="place_hermitage_name">Центр «Эрмитаж-Казань»</string>
+    <string name="place_hermitage_location">Казанский Кремль</string>
+    <string name="place_hermitage_description">Выставочный центр Государственного Эрмитажа в здании юнкерского училища. Регулярно привозит выставки из собраний Санкт-Петербурга.</string>
+    <string name="place_natural_history_name">Музей естественной истории Татарстана</string>
+    <string name="place_natural_history_location">Казанский Кремль</string>
+    <string name="place_natural_history_description">Путешествие от рождения Вселенной до наших дней: минералы, окаменелости и скелеты древних животных. Отличный вариант для прогулки с детьми.</string>
+    <string name="place_chak_chak_name">Дом чак-чака</string>
+    <string name="place_chak_chak_location">Старо-Татарская слобода</string>
+    <string name="place_chak_chak_description">Небольшой интерактивный музей татарского чаепития и национальных сладостей. Экскурсия заканчивается дегустацией чак-чака.</string>
+
+    <string name="place_kremlin_embankment_name">Кремлёвская набережная</string>
+    <string name="place_kremlin_embankment_location">Вдоль реки Казанки</string>
+    <string name="place_kremlin_embankment_description">Длинная прогулочная набережная у стен Кремля с велодорожками, фонтанами и видом на Центр семьи «Казан». Особенно красива на закате.</string>
+    <string name="place_black_lake_name">Парк «Чёрное озеро»</string>
+    <string name="place_black_lake_location">Центр города</string>
+    <string name="place_black_lake_description">Старейший парк Казани с прудом, тенистыми аллеями и зимним катком. Тихое место для отдыха в нескольких минутах от улицы Баумана.</string>
+    <string name="place_millennium_name">Парк Тысячелетия</string>
+    <string name="place_millennium_location">Центр, у озера Нижний Кабан</string>
+    <string name="place_millennium_description">Парк, открытый к 1000-летию Казани: широкие аллеи, площадки для отдыха и вид на водную гладь озера Кабан.</string>
+    <string name="place_kaban_embankment_name">Набережная озера Нижний Кабан</string>
+    <string name="place_kaban_embankment_location">Старо-Татарская слобода</string>
+    <string name="place_kaban_embankment_description">Современная набережная с деревянными настилами, амфитеатром и светомузыкальными фонтанами. Летом здесь проходят концерты и фестивали.</string>
+
+    <string name="place_opera_name">Театр оперы и балета им. М. Джалиля</string>
+    <string name="place_opera_location">Пл. Свободы, 2</string>
+    <string name="place_opera_description">Главная музыкальная сцена республики. Каждую зиму здесь проходит Международный оперный фестиваль им. Ф. Шаляпина, а весной — фестиваль классического балета им. Р. Нуриева.</string>
+    <string name="place_kamal_name">Татарский театр им. Галиасгара Камала</string>
+    <string name="place_kamal_location">Ул. Татарстан, 1</string>
+    <string name="place_kamal_description">Старейший татарский драматический театр. Спектакли идут на татарском языке с синхронным переводом на русский.</string>
+    <string name="place_kachalov_name">Театр им. В. И. Качалова</string>
+    <string name="place_kachalov_location">Ул. Баумана, 48</string>
+    <string name="place_kachalov_description">Один из старейших драматических театров России, работающий с XVIII века. В репертуаре — классика и современная драматургия.</string>
+    <string name="place_ekiyat_name">Театр кукол «Экият»</string>
+    <string name="place_ekiyat_location">Ул. Петербургская, 57</string>
+    <string name="place_ekiyat_description">Кукольный театр в здании, напоминающем сказочный замок. Спектакли для детей на татарском и русском языках.</string>
+
+    <string name="place_tatar_cuisine_house_name">Дом татарской кулинарии</string>
+    <string name="place_tatar_cuisine_house_location">Ул. Баумана, 31</string>
+    <string name="place_tatar_cuisine_house_description">Ресторан национальной кухни в центре: эчпочмаки, губадия, бэлеш и, конечно, чак-чак к чаю.</string>
+    <string name="place_tatar_usadba_name">Татарская усадьба</string>
+    <string name="place_tatar_usadba_location">Старо-Татарская слобода</string>
+    <string name="place_tatar_usadba_description">Ресторан и гостиница в стилизованной под старинную усадьбу постройке. Подойдёт для неторопливого ужина с национальными блюдами.</string>
+    <string name="place_tubeteyka_name">Кафе «Тюбетей»</string>
+    <string name="place_tubeteyka_location">Несколько адресов в центре</string>
+    <string name="place_tubeteyka_description">Сеть кафе татарского стрит-фуда: эчпочмаки, кыстыбый и треугольники с разными начинками. Быстро, вкусно и недорого.</string>
+    <string name="place_market_name">Центральный рынок</string>
+    <string name="place_market_location">Ул. Московская</string>
+    <string name="place_market_description">Место, где можно купить домашний чак-чак, талкыш калеве, конскую колбасу казылык и свежий катык.</string>
+
+</resources>
